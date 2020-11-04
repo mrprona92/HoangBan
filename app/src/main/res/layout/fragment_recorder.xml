@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.simplemobiletools.voicerecorder.fragments.RecorderFragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recorder_holder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_blue_200"
+        android:gravity="center"
+        android:hint="Choose button to record"
+        android:padding="10dp"
+        android:textColor="@color/md_grey_white"
+        android:textColorHint="@color/hint_white"
+        android:textSize="14.5sp"
+        android:layout_alignParentTop="true"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="8dp"
+        app:spinner_divider_color="@color/md_grey_white"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_item_array="@array/array_number"
+        app:spinner_popup_animation="dropdown"
+        app:spinner_popup_background="@color/cardview_dark_background"
+        app:spinner_popup_elevation="14dp" />
+
+
+    <com.visualizer.amplitude.AudioRecordView
+        android:id="@+id/recorder_visualizer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recording_duration"
+        android:layout_below="@id/spinner"
+        android:layout_margin="@dimen/big_margin"
+        android:background="@drawable/frame_background"
+        app:chunkAlignTo="center"
+        app:chunkMaxHeight="200dp"
+        app:chunkMinHeight="2dp"
+        app:chunkRoundedCorners="true"
+        app:chunkSoftTransition="true"
+        app:chunkSpace="1dp"
+        app:chunkWidth="3dp" />
+
+    <com.simplemobiletools.commons.views.MyTextView
+        android:id="@+id/recording_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/toggle_recording_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/bigger_margin"
+        android:textSize="@dimen/extra_big_text_size"
+        tools:text="00:00" />
+
+    <ImageView
+        android:id="@+id/toggle_recording_button"
+        android:layout_width="@dimen/toggle_recording_button_size"
+        android:layout_height="@dimen/toggle_recording_button_size"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/big_margin"
+        android:background="@drawable/circle_background"
+        android:elevation="@dimen/medium_margin"
+        android:padding="@dimen/normal_margin"
+        android:src="@drawable/ic_microphone_vector" />
+
+</com.simplemobiletools.voicerecorder.fragments.RecorderFragment>
