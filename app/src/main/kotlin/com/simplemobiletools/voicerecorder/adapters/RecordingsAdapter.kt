@@ -15,6 +15,7 @@ import com.simplemobiletools.commons.views.FastScroller
 import com.simplemobiletools.commons.views.MyRecyclerView
 import com.simplemobiletools.voicerecorder.BuildConfig
 import com.simplemobiletools.voicerecorder.R
+import com.simplemobiletools.voicerecorder.activities.CustomRecyclerViewAdapter
 import com.simplemobiletools.voicerecorder.activities.SimpleActivity
 import com.simplemobiletools.voicerecorder.dialogs.RenameRecordingDialog
 import com.simplemobiletools.voicerecorder.helpers.getAudioFileContentUri
@@ -26,7 +27,7 @@ import java.util.*
 
 class RecordingsAdapter(activity: SimpleActivity, var recordings: ArrayList<Recording>, val refreshListener: RefreshRecordingsListener,
                         recyclerView: MyRecyclerView, fastScroller: FastScroller, itemClick: (Any) -> Unit) :
-        MyRecyclerViewAdapter(activity, recyclerView, fastScroller, itemClick) {
+    CustomRecyclerViewAdapter(activity, recyclerView, fastScroller, itemClick) {
 
     var currRecordingId = 0
 

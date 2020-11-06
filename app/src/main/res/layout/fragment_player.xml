@@ -26,8 +26,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/player_controls_wrapper"
         android:clipToPadding="false"
-        android:scrollbars="none"
-        app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager" />
+        android:scrollbars="none" />
 
     <com.simplemobiletools.commons.views.FastScroller
         android:id="@+id/recordings_fastscroller"
@@ -47,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
         tools:ignore="HardcodedText">
 
         <View

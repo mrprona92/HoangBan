@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.vistrav:pop:2.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f10b02719d6da9fb30b357bc3760adcd/jetified-pop-2.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f10b02719d6da9fb30b357bc3760adcd/jetified-pop-2.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f10b02719d6da9fb30b357bc3760adcd/jetified-pop-2.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vistrav/pop/2.1/e795bebbf5072bf0de09cb935d34943d01f3b9f2/pop-2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.vistrav/pop/2.1/c6e5d003150c8bb8e0d614bd5fbf5d5fe48e32b6/pop-2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

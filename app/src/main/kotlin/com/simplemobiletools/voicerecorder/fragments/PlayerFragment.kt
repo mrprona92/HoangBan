@@ -13,6 +13,9 @@ import android.provider.MediaStore
 import android.provider.MediaStore.Audio.Media
 import android.util.AttributeSet
 import android.widget.SeekBar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.isQPlus
 import com.simplemobiletools.voicerecorder.R
@@ -31,7 +34,9 @@ import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
-class PlayerFragment(context: Context, attributeSet: AttributeSet) : MyViewPagerFragment(context, attributeSet), RefreshRecordingsListener {
+
+class PlayerFragment(context: Context, attributeSet: AttributeSet) :
+    MyViewPagerFragment(context, attributeSet), RefreshRecordingsListener {
     private val FAST_FORWARD_SKIP_MS = 10000
 
     private var player: MediaPlayer? = null
@@ -108,7 +113,8 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) : MyViewPager
             }
 
             val prevRecordingIndex = adapter.recordings.indexOfFirst { it.id == wantedRecordingID }
-            val prevRecording = adapter.recordings.getOrNull(prevRecordingIndex) ?: return@setOnClickListener
+            val prevRecording =
+                adapter.recordings.getOrNull(prevRecordingIndex) ?: return@setOnClickListener
             playRecording(prevRecording)
         }
 
@@ -118,9 +124,11 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) : MyViewPager
                 return@setOnClickListener
             }
 
-            val oldRecordingIndex = adapter.recordings.indexOfFirst { it.id == adapter.currRecordingId }
+            val oldRecordingIndex =
+                adapter.recordings.indexOfFirst { it.id == adapter.currRecordingId }
             val newRecordingIndex = (oldRecordingIndex + 1) % adapter.recordings.size
-            val newRecording = adapter.recordings.getOrNull(newRecordingIndex) ?: return@setOnClickListener
+            val newRecording =
+                adapter.recordings.getOrNull(newRecordingIndex) ?: return@setOnClickListener
             playRecording(newRecording)
             playedRecordingIDs.push(newRecording.id)
         }
@@ -135,21 +143,36 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) : MyViewPager
 
         recordings_placeholder.beVisibleIf(recordings.isEmpty())
         if (recordings.isEmpty()) {
-            val stringId = if (isQPlus()) R.string.no_recordings_found else R.string.no_recordings_in_folder_found
+            val stringId =
+                if (isQPlus()) R.string.no_recordings_found else R.string.no_recordings_in_folder_found
             recordings_placeholder.text = context.getString(stringId)
             resetProgress(null)
             player?.stop()
         }
 
         val adapter = getRecordingsAdapter()
+
         if (adapter == null) {
-            RecordingsAdapter(context as SimpleActivity, recordings, this, recordings_list, recordings_fastscroller) {
+            RecordingsAdapter(
+                context as SimpleActivity,
+                recordings,
+                this,
+                recordings_list,
+                recordings_fastscroller
+            ) {
                 playRecording(it as Recording)
                 if (playedRecordingIDs.isEmpty() || playedRecordingIDs.peek() != it.id) {
                     playedRecordingIDs.push(it.id)
                 }
             }.apply {
                 recordings_list.adapter = this
+                recyclerView.layoutManager = object : GridLayoutManager(context, 3) {
+                    override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
+                        // force height of viewHolder here, this will override layout_height from xml
+                        lp.height = height / 3
+                        return true
+                    }
+                }
             }
         } else {
             adapter.updateItems(recordings)
@@ -197,7 +220,7 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) : MyViewPager
                 size = getSizeFromUri(id.toLong())
             }
 
-            val recording = Recording(id, title, "", timestamp, duration.toInt(), size)
+            val recording = Recording(id, title.replace(".m4a", ""), "", timestamp, duration.toInt(), size)
             recordings.add(recording)
         }
 
