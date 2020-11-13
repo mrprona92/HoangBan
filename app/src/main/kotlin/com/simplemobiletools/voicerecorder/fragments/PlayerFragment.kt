@@ -36,7 +36,7 @@ import kotlin.collections.ArrayList
 
 
 class PlayerFragment(context: Context, attributeSet: AttributeSet) :
-    MyViewPagerFragment(context, attributeSet), RefreshRecordingsListener {
+        MyViewPagerFragment(context, attributeSet), RefreshRecordingsListener {
     private val FAST_FORWARD_SKIP_MS = 10000
 
     private var player: MediaPlayer? = null
@@ -114,7 +114,7 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) :
 
             val prevRecordingIndex = adapter.recordings.indexOfFirst { it.id == wantedRecordingID }
             val prevRecording =
-                adapter.recordings.getOrNull(prevRecordingIndex) ?: return@setOnClickListener
+                    adapter.recordings.getOrNull(prevRecordingIndex) ?: return@setOnClickListener
             playRecording(prevRecording)
         }
 
@@ -125,10 +125,10 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) :
             }
 
             val oldRecordingIndex =
-                adapter.recordings.indexOfFirst { it.id == adapter.currRecordingId }
+                    adapter.recordings.indexOfFirst { it.id == adapter.currRecordingId }
             val newRecordingIndex = (oldRecordingIndex + 1) % adapter.recordings.size
             val newRecording =
-                adapter.recordings.getOrNull(newRecordingIndex) ?: return@setOnClickListener
+                    adapter.recordings.getOrNull(newRecordingIndex) ?: return@setOnClickListener
             playRecording(newRecording)
             playedRecordingIDs.push(newRecording.id)
         }
@@ -139,12 +139,12 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) :
     }
 
     private fun setupAdapter() {
-        val recordings = getRecordings()
+        val recordings = ArrayList(getRecordings().take(4))
 
         recordings_placeholder.beVisibleIf(recordings.isEmpty())
         if (recordings.isEmpty()) {
             val stringId =
-                if (isQPlus()) R.string.no_recordings_found else R.string.no_recordings_in_folder_found
+                    if (isQPlus()) R.string.no_recordings_found else R.string.no_recordings_in_folder_found
             recordings_placeholder.text = context.getString(stringId)
             resetProgress(null)
             player?.stop()
@@ -154,11 +154,11 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) :
 
         if (adapter == null) {
             RecordingsAdapter(
-                context as SimpleActivity,
-                recordings,
-                this,
-                recordings_list,
-                recordings_fastscroller
+                    context as SimpleActivity,
+                    recordings,
+                    this,
+                    recordings_list,
+                    recordings_fastscroller
             ) {
                 playRecording(it as Recording)
                 if (playedRecordingIDs.isEmpty() || playedRecordingIDs.peek() != it.id) {
@@ -166,10 +166,10 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) :
                 }
             }.apply {
                 recordings_list.adapter = this
-                recyclerView.layoutManager = object : GridLayoutManager(context, 3) {
+                recyclerView.layoutManager = object : GridLayoutManager(context, 2) {
                     override fun checkLayoutParams(lp: RecyclerView.LayoutParams): Boolean {
                         // force height of viewHolder here, this will override layout_height from xml
-                        lp.height = height / 3
+                        lp.height = height / 2
                         return true
                     }
                 }
@@ -193,11 +193,11 @@ class PlayerFragment(context: Context, attributeSet: AttributeSet) :
 
         val uri = Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
         val projection = arrayOf(
-            Media._ID,
-            Media.DISPLAY_NAME,
-            Media.DATE_ADDED,
-            Media.DURATION,
-            Media.SIZE
+                Media._ID,
+                Media.DISPLAY_NAME,
+                Media.DATE_ADDED,
+                Media.DURATION,
+                Media.SIZE
         )
 
         val selection = "${Media.OWNER_PACKAGE_NAME} = ?"

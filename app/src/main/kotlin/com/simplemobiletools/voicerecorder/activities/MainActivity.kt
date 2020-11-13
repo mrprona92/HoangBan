@@ -15,10 +15,8 @@ import com.simplemobiletools.voicerecorder.adapters.ViewPagerAdapter
 import com.simplemobiletools.voicerecorder.extensions.config
 import com.simplemobiletools.voicerecorder.helpers.STOP_AMPLITUDE_UPDATE
 import com.simplemobiletools.voicerecorder.services.RecorderService
-import com.skydoves.powerspinner.OnSpinnerItemSelectedListener
 import com.vistrav.ask.Ask
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_recorder.*
 
 
 class MainActivity : SimpleActivity() {

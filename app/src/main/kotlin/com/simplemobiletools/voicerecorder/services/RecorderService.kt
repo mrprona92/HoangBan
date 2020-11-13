@@ -229,7 +229,6 @@ class RecorderService : Service() {
                         MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id
                     )
 
-
                     contentResolver.update(
                         tempUri,
                         updatedSongDetails,
